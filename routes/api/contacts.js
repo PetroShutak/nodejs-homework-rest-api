@@ -6,6 +6,9 @@ const {
   update,
   deleteById,
 } = require("../../controllers/api/contactsController");
+const {
+  updateFavorite,
+} = require("../../controllers/api/favoritesController");
 
 const router = express.Router();
 
@@ -23,6 +26,10 @@ router.post("/", (req, res, next) => {
 
 router.put("/:contactId", (req, res, next) => {
   update(req, res, next);
+});
+
+router.patch("/:contactId/favorite", (req, res, next) => {
+  updateFavorite(req, res, next);
 });
 
 router.delete("/:contactId", (req, res, next) => {
