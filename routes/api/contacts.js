@@ -4,7 +4,7 @@ const {
   getById,
   create,
   update,
-  updateContactStatus,
+  updateStatus,
   deleteById,
 } = require("../../controllers/api/contactsController");
 
@@ -28,7 +28,7 @@ router.put("/:contactId", (req, res, next) => {
 });
 
 router.patch("/:contactId/favorite", (req, res, next) => {
-  updateContactStatus(req, res, next);
+  updateStatus(req, res, next);
 });
 
 router.delete("/:contactId", (req, res, next) => {
