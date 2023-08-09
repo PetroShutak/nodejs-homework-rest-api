@@ -8,7 +8,6 @@ const {
   deleteById,
 } = require("../../controllers/api/contactsController");
 
-
 const router = express.Router();
 
 router.get("/", (req, res, next) => {

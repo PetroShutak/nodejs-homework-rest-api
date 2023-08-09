@@ -87,6 +87,11 @@ const updateStatus = async (req, res) => {
   try {
     const contactId = req.params.contactId;
 
+    if (!("favorite" in req.body)) {
+      res.status(400).json({ message: "missing field favorite" });
+      return;
+    }
+
     const { error, value } = schemaUpdateContact.validate(req.body);
 
     if (error) {
