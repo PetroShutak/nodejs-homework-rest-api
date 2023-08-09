@@ -15,7 +15,7 @@ const contactSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-}, { versionKey: false
+}, { versionKey: false, timestamps: true
 });
 
 const Contact = mongoose.model('Contact', contactSchema);

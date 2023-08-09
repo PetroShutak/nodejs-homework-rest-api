@@ -29,32 +29,34 @@ const addContact = async (name, email, phone) => {
   }
 };
 
-// const updateContact = async (contactId, name, email, phone) => {
-//   try {
-//     const contact = await Contact.findByIdAndUpdate(
-//       contactId,
-//       { name, email, phone },
-//       { new: true }
-//     );
-//     return contact;
-//   } catch (error) {
-//     console.error('Error updating contact:', error);
-//     throw new Error('Internal Server Error');
-//   }
-// };
-const updateContact = async (contactId, favorite) => {
+const updateContact = async (contactId, name, email, phone) => {
   try {
-    const updatedContact = await Contact.findByIdAndUpdate(
+    const contact = await Contact.findByIdAndUpdate(
       contactId,
-      { favorite }, // Оновлюємо тільки поле favorite
+      { name, email, phone },
       { new: true }
     );
-    return updatedContact;
+    return contact;
   } catch (error) {
     console.error('Error updating contact:', error);
     throw new Error('Internal Server Error');
   }
 };
+
+const updateContactStatus = async (contactId, favorite) => {
+  try {
+    const contact = await Contact.findByIdAndUpdate(
+      contactId,
+      { favorite },
+      { new: true }
+    );
+    return contact;
+  } catch (error) {
+    console.error('Error updating contact:', error);
+    throw new Error('Internal Server Error');
+  }
+};
+
 
 
 const removeContact = async (contactId) => {
@@ -72,6 +74,7 @@ module.exports = {
   getContactById,
   addContact,
   updateContact,
+  updateContactStatus,
   removeContact,
 };
 

@@ -4,6 +4,7 @@ const {
   getContactById,
   addContact,
   updateContact,
+  updateContactStatus,
   removeContact,
 } = require("../../models/contacts");
 const { HttpError } = require("../../utils/errors");
@@ -17,7 +18,7 @@ const getAll = async (_, res) => {
     const contacts = await listContacts();
     res.status(200).json(contacts);
   } catch (error) {
-    console.error('Error getting all contacts:', error);
+    console.error("Error getting all contacts:", error);
     throw new HttpError(500, "Internal Server Error");
   }
 };
@@ -33,7 +34,7 @@ const getById = async (req, res) => {
 
     res.status(200).json(contact);
   } catch (error) {
-    console.error('Error getting contact by ID:', error);
+    console.error("Error getting contact by ID:", error);
     throw new HttpError(500, "Internal Server Error");
   }
 };
@@ -52,7 +53,7 @@ const create = async (req, res) => {
 
     res.status(201).json(newContact);
   } catch (error) {
-    console.error('Error creating contact:', error);
+    console.error("Error creating contact:", error);
     throw new HttpError(500, "Internal Server Error");
   }
 };
@@ -77,7 +78,32 @@ const update = async (req, res) => {
 
     res.status(200).json(updatedContact);
   } catch (error) {
-    console.error('Error updating contact:', error);
+    console.error("Error updating contact:", error);
+    throw new HttpError(500, "Internal Server Error");
+  }
+};
+
+const updateStatus = async (req, res) => {
+  try {
+    const contactId = req.params.contactId;
+
+    const { error, value } = schemaUpdateContact.validate(req.body);
+
+    if (error) {
+      throw new HttpError(400, error.message);
+    }
+
+    const { favorite = null } = value;
+
+    const updatedContact = await updateContactStatus(contactId, favorite);
+
+    if (!updatedContact) {
+      throw new HttpError(404, "Not found");
+    }
+
+    res.status(200).json(updatedContact);
+  } catch (error) {
+    console.error("Error updating contact:", error);
     throw new HttpError(500, "Internal Server Error");
   }
 };
@@ -94,7 +120,7 @@ const deleteById = async (req, res) => {
 
     res.status(200).json({ message: "contact deleted" });
   } catch (error) {
-    console.error('Error deleting contact:', error);
+    console.error("Error deleting contact:", error);
     throw new HttpError(500, "Internal Server Error");
   }
 };
@@ -104,5 +130,6 @@ module.exports = {
   getById: catchAsync(getById),
   create: catchAsync(create),
   update: catchAsync(update),
+  updateStatus: catchAsync(updateStatus),
   deleteById: catchAsync(deleteById),
 };

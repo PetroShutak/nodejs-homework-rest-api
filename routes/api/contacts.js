@@ -4,11 +4,10 @@ const {
   getById,
   create,
   update,
+  updateContactStatus,
   deleteById,
 } = require("../../controllers/api/contactsController");
-const {
-  updateFavorite,
-} = require("../../controllers/api/favoritesController");
+
 
 const router = express.Router();
 
@@ -29,7 +28,7 @@ router.put("/:contactId", (req, res, next) => {
 });
 
 router.patch("/:contactId/favorite", (req, res, next) => {
-  updateFavorite(req, res, next);
+  updateContactStatus(req, res, next);
 });
 
 router.delete("/:contactId", (req, res, next) => {
