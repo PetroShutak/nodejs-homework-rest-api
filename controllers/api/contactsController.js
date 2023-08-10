@@ -6,7 +6,7 @@ const {
   updateContact,
   updateContactStatus,
   removeContact,
-} = require("../../models/contacts");
+} = require("../../models/contacts/contacts");
 const { HttpError } = require("../../utils/errors");
 const {
   schemaCreateContact,
