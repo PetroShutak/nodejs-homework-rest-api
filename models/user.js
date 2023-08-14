@@ -16,7 +16,9 @@ const userSchema = new mongoose.Schema({
     default: "starter",
   },
   token: String,
-});
+},{ versionKey: false, timestamps: true
+}
+);
 
 const User = mongoose.model("User", userSchema);
 
