@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
-const { HttpError } = require("../utils/HttpError");
+const { HttpError } = require("../utilities");
 const { SECRET_KEY } = process.env;
 
-const { User } = require("../models/user");
+const { User } = require("../models");
 
-const authentication = async (req, res, next) => {
+const authenticate = async (req, res, next) => {
   const { authorization = "" } = req.headers;
   const [bearer, token] = authorization.split(" ");
   if (bearer !== "Bearer" || !token) {
@@ -24,4 +24,4 @@ const authentication = async (req, res, next) => {
   }
 };
 
-module.exports = authentication;
+module.exports = authenticate;

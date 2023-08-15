@@ -1,5 +1,3 @@
-const User = require("./models/user");
+const { Contact, schemas } = require("./contact");
 
-module.exports = {
-  User,
-};
+module.exports = { Contact, schemas };

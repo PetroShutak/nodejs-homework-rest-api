@@ -1,5 +1,5 @@
-const User = require("../../../models/user");
-const { HttpError } = require("../../../utils/errors");
+const { User } = require("../../models/user");
+const { HttpError } = require("../../utilities");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
