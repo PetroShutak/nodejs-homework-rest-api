@@ -20,6 +20,7 @@ const listContacts = async (req, res) => {
     }).populate("owner", "name email");
   }
 
+  console.log(result);
   res.json(result);
 };
 
