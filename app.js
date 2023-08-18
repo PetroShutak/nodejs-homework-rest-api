@@ -1,7 +1,12 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
+
 require("dotenv").config();
+
+const swaggerjsdoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+const swaggerOptions = require("./middlewares/swagger");
 
 const authRouter = require("./routes/api/auth");
 const contactsRouter = require("./routes/api/contacts");
@@ -17,12 +22,17 @@ app.use(express.json());
 app.use("/api/users", authRouter);
 app.use("/api/contacts", contactsRouter);
 
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerjsdoc(swaggerOptions))
+);
+
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
 });
 
 app.use((err, req, res, next) => {
-
   const { status = 500, message = "Internal server error" } = err;
   res.status(status).json({ message });
 });
