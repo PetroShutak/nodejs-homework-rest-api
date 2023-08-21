@@ -25,15 +25,21 @@ router.patch(
   ctrl.updateSubscription
 );
 
-module.exports = router;
+router.patch(
+  "/avatars",
+  authenticate,
+  validateBody(schemas.registerLoginSchema),
+  // ctrl.updateAvatar
+);
 
+module.exports = router;
 
 /**
  * @swagger
  * tags:
  *   name: Users
  *   description: API для управління користувачами
- * 
+ *
  * /api/users/register:
  *   post:
  *     summary: Реєстрація нового користувача
@@ -62,7 +68,7 @@ module.exports = router;
  *         description: Користувача успішно створено
  *       400:
  *         description: Некоректний запит
- * 
+ *
  * /api/users/login:
  *   post:
  *     summary: Вхід користувача
@@ -91,7 +97,7 @@ module.exports = router;
  *         description: Успішний вхід
  *       400:
  *         description: Некоректний запит
- * 
+ *
  * /api/users/current:
  *   get:
  *     summary: Отримати поточного користувача
@@ -101,7 +107,7 @@ module.exports = router;
  *     responses:
  *       200:
  *         description: Успішно отримано інформацію про поточного користувача
- * 
+ *
  * /api/users/logout:
  *   post:
  *     summary: Вихід користувача
@@ -111,7 +117,7 @@ module.exports = router;
  *     responses:
  *       200:
  *         description: Успішний вихід
- * 
+ *
  * /api/users:
  *   patch:
  *     summary: Оновити підписку користувача
