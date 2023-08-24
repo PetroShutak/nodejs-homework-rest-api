@@ -1,13 +1,3 @@
-/**
- * Middleware function to authenticate user using JWT token.
- * @function
- * @async
- * @param {Object} req - Express request object.
- * @param {Object} res - Express response object.
- * @param {Function} next - Express next middleware function.
- * @throws {HttpError} 401 - If user is not authenticated.
- * @returns {void}
- */
 const jwt = require("jsonwebtoken");
 const { HttpError } = require("../utilities");
 const { SECRET_KEY } = process.env;
