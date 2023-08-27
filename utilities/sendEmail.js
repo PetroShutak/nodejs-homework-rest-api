@@ -4,21 +4,15 @@ require("dotenv").config();
 const { SENDGRID_KEY } = process.env;
 
 sgMail.setApiKey(SENDGRID_KEY);
-const msg = {
-  to: "nadia.shutak@gmail.com", // Change to your recipient
-  from: "petro.shutak.ua@gmail.com", // Change to your verified sender
-  subject: "Sending with SendGrid is Fun",
-  text: "and easy to do anywhere, even with Node.js",
-  html: "<strong>and easy to do anywhere, even with Node.js</strong>",
+
+const sendEmail = async (data) => {
+  const email = { ...data, from: "petro.shutak.ua@gmail.com" };
+  await sgMail.send(email);
+  console.log("Email sent");
+  return true;
 };
-sgMail
-  .send(msg)
-  .then(() => {
-    console.log("Email sent");
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+
+module.exports = sendEmail;
 
 // const sgMail = require("@sendgrid/mail");
 // require("dotenv").config();
@@ -26,11 +20,18 @@ sgMail
 // const { SENDGRID_KEY } = process.env;
 
 // sgMail.setApiKey(SENDGRID_KEY);
-
-// const sendEmail = async (data) => {
-//   const email = { ...data, from: "petro.shutak.ua@gmail.com" };
-//   await sgMail.send(email);
-//   return true;
+// const msg = {
+//   to: "nadia.shutak@gmail.com", // Change to your recipient
+//   from: "petro.shutak.ua@gmail.com", // Change to your verified sender
+//   subject: "Sending with SendGrid is Fun",
+//   text: "this is final homevork of course Node.js",
+//   html: "<strong>this is final homevork of course Node.js</strong>",
 // };
-
-// module.exports = sendEmail;
+// sgMail
+//   .send(msg)
+//   .then(() => {
+//     console.log("Email sent");
+//   })
+//   .catch((error) => {
+//     console.error(error);
+//   });
