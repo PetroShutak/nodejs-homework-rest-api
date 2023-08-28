@@ -6,7 +6,12 @@ require("dotenv").config();
 const authRouter = require("./routes/api/auth");
 const contactsRouter = require("./routes/api/contacts");
 
+const swaggerUi = require('swagger-ui-express');
+const specs = require('./swaggerDef');
+
 const app = express();
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
