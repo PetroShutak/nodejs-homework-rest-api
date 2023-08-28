@@ -1,6 +1,5 @@
 
-Read demo documentation: https://documenter.getpostman.com/view/21712710/2s9Y5R3SCc
-
+# Node.js course
 - hw02 - express  ✔
 - hw03 - MongoDB  ✔
 - hw04 - auth  ✔
